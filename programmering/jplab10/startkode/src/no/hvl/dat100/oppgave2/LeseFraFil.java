@@ -12,27 +12,32 @@ public class LeseFraFil {
 
 	static public void main(String[] args) throws FileNotFoundException {
 
-		String filnavn;
+		String filnavn = null;
 
-		filnavn = JOptionPane.showInputDialog("Filnavn i mappen " + MAPPE_STR);
+		try {
 
-		File file = new File(MAPPE_STR + filnavn);
-		Scanner reader = new Scanner(file);
+			filnavn = JOptionPane.showInputDialog("Filnavn i mappen " + MAPPE_STR);
 
-		int linenumber = 1;
+			File file = new File(MAPPE_STR + filnavn);
+			Scanner reader = new Scanner(file);
 
-		// les innhold i filen linje for linje
-		String line;
+			int linenumber = 1;
 
-		while (reader.hasNextLine()) {
-			line = reader.nextLine();
-			System.out.println(linenumber + " " + line);
-			linenumber++;
+			// les innhold i filen linje for linje
+			String line;
+
+			while (reader.hasNextLine()) {
+				line = reader.nextLine();
+				System.out.println(linenumber + " " + line);
+				linenumber++;
+			}
+
+			reader.close();
+		} catch (FileNotFoundException e) {
+			if (filnavn != null) {
+				JOptionPane.showMessageDialog(null, "Filen " + filnavn + " finnes ikke. \n" + e.getMessage());
+			}
 		}
 
-		reader.close();
-
-		// JOptionPane.showMessageDialog(null, "Filen " + filnavn + " finnes
-		// ikke. \n" + e.getMessage());
 	}
 }
