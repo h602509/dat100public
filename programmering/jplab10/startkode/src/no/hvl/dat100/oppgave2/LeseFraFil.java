@@ -17,9 +17,9 @@ public class LeseFraFil {
 		int i = 0;
 		int antallInput = 3;
 		boolean lestFraFil = false;
-		
+
 		while (i < antallInput) {
-			
+
 			try {
 
 				filnavn = JOptionPane.showInputDialog("Filnavn i mappen " + MAPPE_STR);
@@ -27,7 +27,7 @@ public class LeseFraFil {
 				File file = new File(MAPPE_STR + filnavn);
 
 				BufferedReader reader = new BufferedReader(new FileReader(file));
-				
+
 				int linenumber = 1;
 
 				// les innhold i filen linje for linje
@@ -42,16 +42,18 @@ public class LeseFraFil {
 
 				reader.close();
 			} catch (IOException e) {
+				
 				if (filnavn != null) {
 					JOptionPane.showMessageDialog(null, "Filen " + filnavn + " finnes ikke. \n" + e.getMessage());
 				}
 			}
-			if (lestFraFil) {
-				
-				i = antallInput;
 			
+			if (lestFraFil) {
+
+				i = antallInput;
 			}
-				i++;
+			
+			i++;
 		}
 	}
 }
