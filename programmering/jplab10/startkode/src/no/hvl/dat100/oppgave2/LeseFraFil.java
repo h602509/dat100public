@@ -11,49 +11,53 @@ public class LeseFraFil {
 
 	static String MAPPE_STR = System.getProperty("user.dir") + "/src/no/hvl/dat100/oppgave2/";
 
-	static public void main(String[] args) throws FileNotFoundException {
+	static public void main(String[] args) {
 
-		String filnavn = null;
-		int i = 0;
-		int antallInput = 3;
-		boolean lestFraFil = false;
+		int antallForsok = 0;
 
-		while (i < antallInput) {
+		try {
+			BufferedReader reader = null;
 
-			try {
+			while (antallForsok < 3 && reader == null) {
 
-				filnavn = JOptionPane.showInputDialog("Filnavn i mappen " + MAPPE_STR);
-
+				String filnavn = JOptionPane.showInputDialog("Filnavn i mappen " + MAPPE_STR);
 				File file = new File(MAPPE_STR + filnavn);
 
-				BufferedReader reader = new BufferedReader(new FileReader(file));
+				try {
 
-				int linenumber = 1;
+					antallForsok++;
+					reader = new BufferedReader(new FileReader(file));
 
-				// les innhold i filen linje for linje
-				String line;
+				} catch (FileNotFoundException e) {
 
-				while (reader.ready()) {
-					line = reader.readLine();
-					System.out.println(linenumber + " " + line);
-					linenumber++;
-					lestFraFil = true;
-				}
-
-				reader.close();
-			} catch (IOException e) {
-				
-				if (filnavn != null) {
 					JOptionPane.showMessageDialog(null, "Filen " + filnavn + " finnes ikke. \n" + e.getMessage());
+
 				}
 			}
-			
-			if (lestFraFil) {
 
-				i = antallInput;
+			if (reader == null) {
+				JOptionPane.showMessageDialog(null, "Du har brukt opp alle forsøkene dine.\n");
+				return;
+
 			}
-			
-			i++;
+
+			int linenumber = 1;
+
+			// les innhold i filen linje for linje
+			String line;
+
+			while (reader.ready()) {
+				line = reader.readLine();
+				System.out.println(linenumber + " " + line);
+				linenumber++;
+
+			}
+
+			reader.close();
+
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Dette ble krøll\n" + e.getMessage());
+
 		}
 	}
 }
