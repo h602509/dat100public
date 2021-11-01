@@ -1,9 +1,10 @@
 package no.hvl.dat100.oppgave2;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-
+import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class LeseFraFil {
@@ -14,33 +15,43 @@ public class LeseFraFil {
 
 		String filnavn = null;
 		int i = 0;
-		while (i < 3) {
-
+		int antallInput = 3;
+		boolean lestFraFil = false;
+		
+		while (i < antallInput) {
+			
 			try {
 
 				filnavn = JOptionPane.showInputDialog("Filnavn i mappen " + MAPPE_STR);
 
 				File file = new File(MAPPE_STR + filnavn);
-				Scanner reader = new Scanner(file);
 
+				BufferedReader reader = new BufferedReader(new FileReader(file));
+				
 				int linenumber = 1;
 
 				// les innhold i filen linje for linje
 				String line;
 
-				while (reader.hasNextLine()) {
-					line = reader.nextLine();
+				while (reader.ready()) {
+					line = reader.readLine();
 					System.out.println(linenumber + " " + line);
 					linenumber++;
+					lestFraFil = true;
 				}
 
 				reader.close();
-			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
 				if (filnavn != null) {
 					JOptionPane.showMessageDialog(null, "Filen " + filnavn + " finnes ikke. \n" + e.getMessage());
 				}
 			}
-			i++;
+			if (lestFraFil) {
+				
+				i = antallInput;
+			
+			}
+				i++;
 		}
 	}
 }
