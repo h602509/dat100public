@@ -32,8 +32,8 @@ public class GoBtnListener implements ActionListener {
 
 		Scanner in = null;
 
-		/*
-		 
+		try {
+
 			// konstruer URL objekt
 			URL url = new URL(urlstr);
 
@@ -43,32 +43,39 @@ public class GoBtnListener implements ActionListener {
 
 			in = new Scanner(connection.getInputStream());
 
-			// akkumuler teksten som leses via scanner
-			int i = 1;
-			while (i <= MyBrowser.MAX_LINES && in.hasNextLine()) {
+		} catch (MalformedURLException e1) {
 
-				String linje = in.nextLine();
+		} catch (IOException e1) {
 
-				text = text + linje + "\n";
-			}
+		}
 
-			// legg teksten som er lest fra URL'en inn i hovedvinduet
-			webpagetextarea.setText(text);
+		// akkumuler teksten som leses via scanner
+		int i = 1;
+		while (i <= MyBrowser.MAX_LINES && in.hasNextLine()) {
 
-			if (in != null) {
-				in.close();
-			}
+			String linje = in.nextLine();
+
+			text = text + linje + "\n";
+		}
+
+		// legg teksten som er lest fra URL'en inn i hovedvinduet
+		webpagetextarea.setText(text);
+
+		if (in != null) {
+			in.close();
 			
-		*/
-		
-		/* 
-		 
-		 håndter unntak MalformedURLException (Feil format på URL) og
-		 IOException (web siden kunne ikke åpnes) ved å skive ut feilmelding
-		 bruk setText metoden på webpagetextarea-objektet til å sette teksten
-		 bruk finally til altid å sette addresse-linjen til den tomme teksten
-		 adresse-linjen er representert ved urltextfield
-		
-        */
+			
+			
+		}
+
+		/*
+		 * 
+		 * håndter unntak MalformedURLException (Feil format på URL) og IOException (web
+		 * siden kunne ikke åpnes) ved å skive ut feilmelding bruk setText metoden på
+		 * webpagetextarea-objektet til å sette teksten bruk finally til altid å sette
+		 * addresse-linjen til den tomme teksten adresse-linjen er representert ved
+		 * urltextfield
+		 * 
+		 */
 	}
 }
