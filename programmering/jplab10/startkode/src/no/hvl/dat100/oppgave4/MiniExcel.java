@@ -1,5 +1,7 @@
 package no.hvl.dat100.oppgave4;
 
+import java.util.Arrays;
+
 public class MiniExcel {
 
 	private static int[][] data = { 	
@@ -12,15 +14,18 @@ public class MiniExcel {
 
 	public static void skrivUt() {
 
-		System.out.println("---------------");
+		System.out.println("-----");
 
-		// TODO - START
+		for (int rad = 0; rad < data.length; rad++) {
+			for (int kol = 0; kol < data[rad].length; kol++) {
+				System.out.print(data[rad][kol] + " ");
+				
+			}
+			System.out.println();
+			
+		}
 
-		// iterer igjennom tabellen og skriv ut - utvidet for-løkke
-
-		// TODO _END
-
-		System.out.println("---------------");
+		System.out.println("-----");
 	}
 
 	public static void beregnSum() {
