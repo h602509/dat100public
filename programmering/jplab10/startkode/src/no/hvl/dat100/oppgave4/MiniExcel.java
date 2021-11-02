@@ -5,10 +5,11 @@ import java.util.Arrays;
 public class MiniExcel {
 
 	private static int[][] data = { 	
-			{ 1, 2, 0 }, 
-			{ 3, 4, 0 },
-			{ 5, 6, 0 }, 
-			{ 0, 0, 0 } 
+			{ 1, 2, 1, 0 }, 
+			{ 3, 4, 1, 0 },
+			{ 5, 6, 1, 0 },
+			{ 5, 6, 1, 0 },
+			{ 0, 0, 0, 0 } 
 			
 	};
 
@@ -30,19 +31,29 @@ public class MiniExcel {
 
 	public static void beregnSum() {
 
-		// TODO - START
+		int sumRad = 0;
 
-		// for hver rad (med unntak av siste rad) summer elementene 
-		// og skriv summen i den siste posisjonen for den aktuelle raden
-
-		// TODO - END
-
-		// TODO - START
-
-		// for hver kolonne (med unntak av siste kolonne) summer elementene 
-		// og skriv summen i siste rad i posisjonen svarende til den aktuelle kolonnen
 		
-		// TODO - END
+		for (int rad = 0; rad < data.length - 1; rad++) {
+			for (int kol = 0; kol < data[rad].length - 1; kol++) {
+				
+				sumRad = sumRad + data[rad][kol];
+				
+			}
+			data[rad][data[rad].length - 1] = sumRad;
+			sumRad = 0;
+		}
+			
+		int sumKol = 0;
+
+		for (int kol = 0; kol < data[0].length - 1; kol++) {
+			for (int rad = 0; rad < data.length; rad++) {
+				sumKol = sumKol + data[rad][kol];
+				
+			}
+			data[data.length-1][kol] = sumKol;
+			sumKol = 0;
+		}
 
 	}
 
